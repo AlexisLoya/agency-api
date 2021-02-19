@@ -24,7 +24,7 @@ public class CarController {
     public ResponseEntity<Car> getCar(
             @PathVariable("id") String carId) {
         return carService.getByid(carId)
-                .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
+                .map(car -> new ResponseEntity<>(car, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -35,7 +35,9 @@ public class CarController {
 
     @PutMapping("/update")
     public ResponseEntity<Car> update(@RequestBody Car car) {
-        return new ResponseEntity<>(carService.update(car), HttpStatus.CREATED);
+        return carService.update(car)
+                .map(updatedcar -> new ResponseEntity<>(updatedcar, HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 

@@ -25,12 +25,18 @@ public class CarService {
         return carRepository.save(entity);
     }
 
-    public Car update(Car entity) {
-        Optional<Car> updatedCar = carRepository.findById(entity.get_id());
-        if (updatedCar.get() != null){
-            return carRepository.save(entity);
+    public Optional<Car> update(Car entity) {
+        try {
+            Optional<Car> updatedCar = carRepository.findById(entity.get_id());
+            if (updatedCar.get() != null){
+                carRepository.save(entity);
+                return carRepository.findById(entity.get_id());
+            }
+            return updatedCar;
+        }catch (Exception exception){
+            System.err.println(exception);
         }
-        return null;
+        return Optional.empty();
     }
 
 
