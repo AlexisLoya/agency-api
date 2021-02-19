@@ -33,6 +33,12 @@ public class CarController {
         return new ResponseEntity<>(carService.save(car), HttpStatus.CREATED);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Car> update(@RequestBody Car car) {
+        return new ResponseEntity<>(carService.update(car), HttpStatus.CREATED);
+    }
+
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(
             @PathVariable("id") String productId) {

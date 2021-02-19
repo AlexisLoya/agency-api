@@ -25,6 +25,15 @@ public class CarService {
         return carRepository.save(entity);
     }
 
+    public Car update(Car entity) {
+        Optional<Car> updatedCar = carRepository.findById(entity.get_id());
+        if (updatedCar.get() != null){
+            return carRepository.save(entity);
+        }
+        return null;
+    }
+
+
     public Boolean delete(String id) {
         return getByid(id).map(entity -> {
             carRepository.delete(entity);
